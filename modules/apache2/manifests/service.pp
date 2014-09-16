@@ -6,8 +6,8 @@ class apache2::service {
     enable      => true,
     hasstatus   => true,
     hasrestart  => true,
-    require     => [ User[$apache2::userName], File["${apache2::configDir}/${apache2::configFile}"] ],
-    subscribe   => File["${apache2::configDir}/${apache2::configFile}"]
+    require     => File["${apache2::configDir}/${apache2::configFile}"],
+    subscribe   => File["${apache2::configDir}/${apache2::configFile}"],
   }
 
 }
