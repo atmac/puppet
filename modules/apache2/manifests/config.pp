@@ -14,7 +14,7 @@ class apache2::config {
     owner   => $apache2::userName,
     group   => $apache2::groupName,
     mode    => 664,
-    source  => "puppet:///modules/apache2/httpd.conf",
+    source  => "puppet:///modules/apache2/etc/httpd/conf/httpd.conf",
     require => File["${apache2::configDir}"],
     #before  => Service[$apache2::service],
 
