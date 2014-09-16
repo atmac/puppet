@@ -13,10 +13,11 @@ class apache2::config {
     ensure  => present,
     owner   => $apache2::userName,
     group   => $apache2::groupName,
-    mode    => 644,
+    mode    => 664,
     source  => "puppet:///modules/apache2/httpd.conf",
     require => File["${apache2::configDir}"],
     before  => Service[$apache2::service],
+
   }
 
   user { "${apache2::userName}":
