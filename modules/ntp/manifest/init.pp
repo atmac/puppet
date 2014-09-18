@@ -1,28 +1,13 @@
-    class ntp {
-      case $operatingsystem {
-        centos, redhat: {
-          $service_name = 'ntpd'
-          $conf_file    = 'ntp.conf.el'
-        }
-        debian, ubuntu: {
-          $service_name = 'ntp'
-          $conf_file    = 'ntp.conf.debian'
-        }
-      }
+class ntp (
 
-      package { 'ntp':
-        ensure => installed,
-      }
-      file { 'ntp.conf':
-        path    => '/etc/ntp.conf',
-        ensure  => file,
-        require => Package['ntp'],
-        source  => "/root/examples/answers/${conf_file}"
-      }
-      service { 'ntp':
-        name      => $service_name,
-        ensure    => running,
-        enable    => true,
-        subscribe => File['ntp.conf'],
-      }
-    }
+	$packages	= $ntp::params::packages,
+	$configDir	= $ntp::params::configDir,
+	$configFile	= $ntp::params::configFile,
+	$userName	= $ntp::params::userName,
+	$groupName	= $ntp::params::groupName,
+	$service	= $ntp::params::service,
+
+) inherits ntp::params {
+  class { 'ntp::package': } -> class { 'ntp::config': } -> class { 'ntp::service': }
+  
+  }
