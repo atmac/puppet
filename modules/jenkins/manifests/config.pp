@@ -36,8 +36,7 @@ class jenkins::config {
     group   => jenkins,
     mode    => 664,
     source  => "puppet:///modules/jenkins/var/lib/jenkins/.ssh/id_rsa",
-#    require => File["${jenkins::configDir}"],
-#    #before  => Service[$jenkins::service],
+
 }
 
     file { "/home/jenkinslave/.ssh/id_rsa":
@@ -46,7 +45,7 @@ class jenkins::config {
     group   => jenkins,
     mode    => 664,
     source  => "puppet:///modules/jenkins/home/jenkinslave/.ssh/id_rsa",
-#    require => File["${jenkins::configDir}"],
-#    #before  => Service[$jenkins::service],
+    require => User["jenkinslave"],
+
 }
 
