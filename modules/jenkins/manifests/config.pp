@@ -9,17 +9,6 @@ class jenkins::config {
    # before  => File[$jenkins::configFile]
   
 
-#  file { "${jenkins::configDir}/${jenkins::configFile}":
-#    ensure  => present,
-#    owner   => $jenkins::userName,
-#    group   => $jenkins::groupName,
-#    mode    => 664,
-#    source  => "puppet:///modules/jenkins/etc/httpd/conf/httpd.conf",
-#    require => File["${jenkins::configDir}"],
-#    #before  => Service[$jenkins::service],
-
-  
-
   user { "jenkinslave":
     ensure      => present,
     home        => "/home/jenkinslave",
@@ -36,14 +25,28 @@ class jenkins::config {
 }
 
   ssh_authorized_key { 'jenkins@ks00':
-  user => 'jenkinslaves',
+  user => 'jenkinslave',
   type => 'ssh-rsa',
   key  => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAu9UdJvr5EEVCvXKq8U84+OFZ+vCoLNWK/9XZ+b4JnPeC4gU/dIge4/AdrMTFJAULrxpBYQxLVB4bpQHrfP1jzl25e2xOlsiNMGhbKqGdTDEwP/9bnCcVKrS0X0D7nv9AxBOxbSkYKS3PqnbcLBDwYWG3w6Yx4npZSElWGgjN3ImRr4fH8yJeaQlSPDjvUO20lvCbgxQT5ZrMwAzDHl5/SxrGDcwTJx3VP3rg5ROnDvlSe/ntfnPOGAFLFBiZJw+MIX+8/94leOw/DmTEG/WxsS2HO+DZ11tq7MvmjYRfMmGNk0hNYoOXp2K06F9fR7pQRcJTJRs+rpxQPEzBGsRkgw==',
 }
 
+     file { "/var/lib/jenkins/.ssh/id_rsa":
+    ensure  => present,
+    owner   => jenkins,
+    group   => jenkins,
+    mode    => 664,
+    source  => "puppet:///modules/jenkins/var/lib/jenkins/.ssh/id_rsa",
+#    require => File["${jenkins::configDir}"],
+#    #before  => Service[$jenkins::service],
+}
 
-
-
-
-
+    file { "/home/jenkinslave/.ssh/id_rsa":
+    ensure  => present,
+    owner   => jenkins,
+    group   => jenkins,
+    mode    => 664,
+    source  => "puppet:///modules/jenkins/home/jenkinslave/.ssh/id_rsa",
+#    require => File["${jenkins::configDir}"],
+#    #before  => Service[$jenkins::service],
+}
 
