@@ -17,7 +17,7 @@ class jenkins::package () {
 #exec { "install_jre":
  #   command => "yum -y install jre",
   #  path    => "/usr/bin/",
-#}
+#}.
 
 
  

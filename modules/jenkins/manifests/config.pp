@@ -20,12 +20,12 @@ class jenkins::config {
 
   
 
-  user { "${jenkins::userName}":
+  user { "jenkinslave":
     ensure      => present,
-    home        => "/home/$jenkins::userName",
+    home        => "/home/jenkinslave",
     managehome  => true,
     shell       => "/bin/bash",
-    comment     => "Jenkins User Account",
+    comment     => "Jenkinslave User Account",
    
   }
 }
