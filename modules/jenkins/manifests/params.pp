@@ -1,6 +1,6 @@
 class jenkins::params {
 
-  $packages	= 'jenkins'
+  $packages	= ['java-1.7.0-openjdk','jenkins']
   $configDir	= '/var/lib/jenkins/'
   $configFile	= 'config.xml'
   $userName	= 'jenkins'
