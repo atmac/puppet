@@ -13,16 +13,16 @@ file {"/var/lib/jenkins/.ssh/":
     owner   => jenkins,
     group   => jenkins,
     mode    => 700,
-    require => ["$jenkins::packages"],
+    require => Package[$jenkins::packages],
 }
 
 
 
- exec { "create_jenkins_.ssh":
-    command => "mkdir -p /var/lib/jenkins/.ssh/ ;chown jenkins:jenkins /var/lib/jenkins/.ssh/",
-    path    => "/usr/local/bin/:/bin/:/usr/bin/",
-    #require => ["$jenkins::packages"],
-  }
+ #exec { "create_jenkins_.ssh":
+  #  command => "mkdir -p /var/lib/jenkins/.ssh/ ;chown jenkins:jenkins /var/lib/jenkins/.ssh/",
+  #  path    => "/usr/local/bin/:/bin/:/usr/bin/",
+    #require =>["$jenkins::packages"],
+#  }
 
 
   
