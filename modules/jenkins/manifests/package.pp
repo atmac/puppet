@@ -9,7 +9,6 @@ class jenkins::package () {
  
  
   package { $jenkins::packages:
- #name   => "httpd.x86_64",
     ensure => "installed",
     provider  => yum,
     require => Exec["create_jenkins_repo"],
